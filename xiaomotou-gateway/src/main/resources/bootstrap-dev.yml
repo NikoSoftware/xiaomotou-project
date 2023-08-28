@@ -1,0 +1,144 @@
+spring:
+  #注册中心
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        group: DEFAULT_GROUP
+      #配置中心
+      config:
+        server-addr: localhost:8848
+        group: DEFAULT_GROUP
+        file-extension: yaml
+        # 共享配置
+        shared-configs:
+          - data-id: application-dev.yaml
+            group: DEFAULT_GROUP
+
+
+#    stream:
+#      #RocketMQ 通用配置
+#      rocketmq:
+#        binder:
+#          name-server: cloud.api.com:9876
+#          # 不加, 会报错：Property 'group' is required - producerGroup
+#          group: rocketmq-group
+#      #bindings 具体生产消息、消费消息的桥梁
+#      bindings:
+#        #Produce Config
+#        output: # 查看org.springframework.cloud.stream.config.BindingProperties
+#          destination: log-topic #指定发送的topic
+#          contentType: application/json #默认是application/json
+#          group: log-group
+
+#spring:
+#  #注册中心
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: test_route
+#          uri: https://www.baidu.com
+#          predicates:
+#            - Query=url,baidu
+#
+#        - id: qq_route
+#          uri: https://www.qq.com
+#          predicates:
+#            - Query=url,qq
+#
+#        - id: party_route
+#          uri: lb://cloud-party
+#          predicates:
+#            - Path=/api/party/**,/hello
+#          filters:
+#            - RewritePath=/api/(?<segment>.*),/$\{segment}
+#
+#        - id: login_route
+#          uri: lb://cloud-login
+#          predicates:
+#            - Path=/api/login/**
+#          filters:
+#            - RewritePath=/api/(?<segment>.*),/$\{segment}
+#
+#        - id: gateway-route
+#          uri: lb://cloud-gateway
+#          predicates:
+#            - Path=/api/gateway/**
+#          filters:
+#            - RewritePath=/api/(?<segment>.*),/$\{segment}
+#
+#        - id: admin-route
+#          uri: lb://cloud-admin
+#          predicates:
+#            - Path=/api/admin/**
+#          filters:
+#            - RewritePath=/api/(?<segment>.*),/$\{segment}
+#
+#        - id: production-route
+#          uri: lb://cloud-production
+#          predicates:
+#            - Path=/api/production/**
+#          filters:
+#            - RewritePath=/api/(?<segment>.*),/$\{segment}
+#
+#        - id: data-route
+#          uri: lb://cloud-data
+#          predicates:
+#            - Path=/api/data/**
+#          filters:
+#            - RewritePath=/api/(?<segment>.*),/$\{segment}
+#
+#    #监控限流
+#    sentinel:
+#      transport:
+#        dashboard: cloud.api.com:8080
+#  sleuth:
+#    web:
+#      client:
+#        # 开启采集链路
+#        enabled: true
+#    sampler:
+#      # 默认采集是 0.1(百分之十),生产环境采用默认，测试环境可以修改为1.0
+#      probability: 1.0
+#
+#  # zipkin服务所在地址
+#  zipkin:
+#    base-url: http://cloud.api.com:9411/
+#    discovery-client-enabled: false #让nacos把它当成一个URL，而不要当做服务名
+#
+## Springboot压缩算法
+#server:
+#  compression:
+#    min-response-size: 512
+#    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+#    excluded-user-agents: gozilla,traviata
+#    enabled: true
+#
+#feign:
+#  client:
+#    config:
+#      #服务名称
+#      cloud-production:
+#        # 连接超时时间
+#        connectTimeout: 90000
+#        # 请求处理超时时间
+#        readTimeout: 90000
+#
+#      default: # default 全局配置
+#        loggerLevel: FULL #日志级别，BASIC就是最基本的请求和响应信息
+#
+#  #Feign 压缩数据
+#  compression:
+#    request:
+#      enabled: true
+#      # 配置压缩的类型
+#      mime-types: text/xml,application/xml,application/json
+#      # 最小压缩值
+#      min-request-size: 2048
+#    response:
+#      enabled: true
+#      #更改自带的连接池
+#  httpclient:
+#    enabled: true # 支持httpClient的开关
+#    max-connections: 200 #最大连接数
+#    max-connections-per-route: 50 # 单个路径的最大连接数

@@ -1,0 +1,7 @@
+server:
+  port: 90
+spring:
+  application:
+    name: xiaomotou-gateway
+  profiles:
+    active: @profiles.active@
